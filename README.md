@@ -1,160 +1,132 @@
-# BloodBridge AI
 
-BloodBridge AI is a Supabase-backed blood donation coordination app with role-based dashboards, rule-based donor matching, emergency request handling, real-time notifications, and an optional Gemini chatbot.
+# 🩸 BloodBridge AI
 
-## Features
+An AI-powered blood donation and emergency response platform that connects donors, recipients, and administrators through intelligent matching, real-time notifications, and AI-assisted guidance.
 
-- Supabase Auth signup/login with donor, recipient, and admin roles
-- Automatic `profiles` creation from Supabase Auth metadata
-- Donor dashboard with donor profile creation, compatibility-filtered requests, donation offers, and notifications
-- Recipient dashboard with recipient profile creation, blood request creation, request status management, and notifications
-- Admin dashboard with real Supabase counts and blood inventory
-- Emergency request flow with priority scoring and compatible donor notifications
-- Rule-based blood compatibility, donor matching, health eligibility, emergency priority, and notification generation
-- Optional Gemini chatbot using `GEMINI_API_KEY`
-- RLS-protected Supabase database schema
-- Vercel-ready Next.js production build
+## 🚀 Overview
 
-## Tech Stack
+BloodBridge AI helps patients find compatible blood donors quickly during emergencies. The platform uses AI-powered matching, blood compatibility logic, donor eligibility checks, and location-based prioritization to make the donation process faster and more efficient.
 
-- Next.js 16 App Router
-- React 19
-- TypeScript
-- Supabase Auth and PostgreSQL
-- Supabase Realtime for notifications
-- Google Gemini REST API for optional chatbot responses
-- Tailwind CSS
+The system is built around three dedicated dashboards:
 
-## Folder Structure
+* **Donor Dashboard**
+* **Recipient Dashboard**
+* **Admin Dashboard**
 
-```txt
-app/                  Next.js pages, route handlers, server actions
-components/           Reusable UI and dashboard components
-lib/ai/               Gemini and rule-based AI health logic
-lib/blood/            Blood compatibility, matching, and priority scoring
-lib/supabase/         Supabase browser/server/proxy helpers
-lib/utils.ts          Shared utilities
-types/                Shared TypeScript types
-sql/                  Supabase schema and safe setup seed
-docs/                 Deployment and manual verification docs
-public/               Public assets
-```
+---
 
-## Environment Variables
+## 🤖 AI-Powered Features
 
-Create `.env.local` for local development and set the same values in Vercel:
+BloodBridge AI combines AI assistance with intelligent automation to improve emergency response.
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-GEMINI_API_KEY=
-GEMINI_MODEL=gemini-3.5-flash
-```
+### AI Assistant
 
-`GEMINI_API_KEY` is optional. If it is missing, the chatbot returns:
+The integrated AI assistant helps users with:
 
-```txt
-AI assistant is currently disabled. Core BloodBridge features still work.
-```
+* Blood donation eligibility questions
+* Blood type compatibility guidance
+* Pre-donation and post-donation care
+* Emergency blood request support
+* Blood donation awareness and education
 
-Google AI Studio may create newer authorization keys that start with `AQ`. Those are valid Gemini keys. Keep `GEMINI_API_KEY` server-only; do not prefix it with `NEXT_PUBLIC_`.
+### Smart AI Logic
 
-## Supabase Setup
+* Blood compatibility checking
+* Donor eligibility verification
+* Intelligent donor-recipient matching
+* Emergency priority scoring
+* Nearby donor prioritization
+* Automated notification recommendations
 
-1. Create a Supabase project.
-2. Open Supabase SQL Editor.
-3. Run `sql/schema.sql`.
-4. Run `sql/seed.sql`.
-5. In Supabase Authentication settings, add redirect URLs:
+---
 
-```txt
-http://localhost:3000/auth/callback
-https://your-vercel-domain.vercel.app/auth/callback
-```
+## 👨‍⚕️ Donor Dashboard
 
-6. Configure email confirmation as desired:
-   - Enabled: users confirm email before login.
-   - Disabled: easier local testing.
+Donors can:
 
-## Admin Setup
+* Manage donor profile
+* Update blood group and health details
+* Set availability status
+* Add location information
+* View matching blood requests
+* Accept donation requests
+* Schedule donations
+* Receive real-time notifications
 
-There is no demo admin login. Create a real user through signup, then promote that user in Supabase SQL Editor:
+---
 
-```sql
-update public.profiles
-set role = 'admin'
-where email = 'your-admin-email@example.com';
-```
+## 🏥 Recipient Dashboard
 
-## Local Development
+Recipients can:
 
-```bash
-pnpm install
-pnpm dev
-```
+* Create emergency blood requests
+* Set urgency level
+* Add hospital information
+* Track request status
+* View donor responses
+* Manage active requests
+* Receive donation updates and notifications
 
-Open:
+---
 
-```txt
-http://localhost:3000
-```
+## 🛡️ Admin Dashboard
 
-## Verification
+Administrators can:
 
-```bash
-pnpm exec tsc --noEmit
-pnpm lint
-pnpm build
-```
+* Monitor platform activity
+* Manage donors and recipients
+* Track blood requests and donations
+* View analytics and statistics
+* Manage blood inventory
+* Oversee emergency requests
 
-Manual flow checks:
+---
 
-1. Sign up as donor using `/auth/sign-up?role=donor`.
-2. Complete donor profile.
-3. Sign out.
-4. Sign up as recipient using `/auth/sign-up?role=recipient`.
-5. Create a blood request.
-6. Sign in as donor and confirm compatible requests appear.
-7. Click `I Can Donate`.
-8. Confirm recipient notification appears.
-9. Submit an emergency request.
-10. Promote a real user to admin and verify admin dashboard data.
-11. Test chatbot with and without `GEMINI_API_KEY`.
+## 🔄 How BloodBridge AI Works
 
-## Vercel Deployment
+1. A recipient creates a blood request.
+2. The system checks blood group compatibility.
+3. AI-powered matching identifies eligible donors.
+4. Nearby donors are prioritized and notified.
+5. Donors review the request and offer to donate.
+6. The recipient receives donation offers.
+7. A donation schedule is confirmed.
+8. Both parties receive real-time updates until completion.
 
-1. Push the repo to GitHub.
-2. Import it into Vercel.
-3. Add environment variables:
+---
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_PUBLIC_SITE_URL=https://your-vercel-domain.vercel.app
-GEMINI_API_KEY=
-GEMINI_MODEL=gemini-3.5-flash
-```
+## ✨ Key Features
 
-4. Deploy.
-5. Add the deployed callback URL to Supabase Authentication redirect URLs.
+* AI-powered blood donation assistant
+* Secure authentication and authorization
+* Role-based dashboards
+* Blood compatibility checker
+* Smart donor matching
+* Emergency request management
+* Location-aware donor discovery
+* Donor eligibility verification
+* Real-time notifications
+* Donation scheduling
+* Blood inventory management
+* Privacy-focused architecture
+* Responsive modern UI
 
-See `docs/DEPLOYMENT_CHECKLIST.md` for a concise checklist.
+---
 
-## Troubleshooting
+## 🛠️ Tech Stack
 
-- Missing Supabase env vars: configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-- Signup succeeds but login fails: check Supabase email confirmation settings.
-- Redirect does not work after email confirmation: check Supabase redirect URLs and `NEXT_PUBLIC_SITE_URL`.
-- Chatbot disabled: add `GEMINI_API_KEY`.
-- No donor requests shown: create a recipient request with a blood type compatible with the donor profile.
-- Admin dashboard inaccessible: promote a real signed-up user to `admin`.
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Supabase Auth
+* PostgreSQL
+* Supabase Realtime
+* Gemini API
+* Vercel
 
-## Security Notes
+---
 
-- No demo mode.
-- No auth bypass.
-- No mock Supabase fallback.
-- Private Gemini keys are server-only.
-- Client Supabase uses only the public anon key.
-- RLS is enabled on all user-facing tables.
+## 🎯 Project Goal
+
+BloodBridge AI aims to reduce delays in emergency blood donation by using intelligent matching, real-time communication, and AI-powered assistance to connect the right donor with the right recipient at the right time.
