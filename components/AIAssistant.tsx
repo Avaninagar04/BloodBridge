@@ -91,7 +91,12 @@ export default function AIAssistant() {
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}))
-        throw new Error(error.message || 'Failed to get response from AI')
+        const assistantMessage = {
+          role: 'assistant',
+          content: error.message || 'Gemini is temporarily unavailable. Core BloodBridge features still work.',
+        }
+        setMessages(prev => [...prev, assistantMessage])
+        return
       }
 
       const reader = response.body?.getReader()
@@ -112,7 +117,6 @@ export default function AIAssistant() {
       }
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
-      console.error('[v0] AI Chat error:', error)
       const errorMessage = { 
         role: 'assistant', 
         content: error instanceof Error ? error.message : 'I encountered a temporary issue. Please try again in a moment.'
@@ -126,7 +130,7 @@ export default function AIAssistant() {
   return (
     <>
       {/* Chat Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-6 right-6 z-[90]">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-all duration-200 hover:-translate-y-1 hover:scale-110 hover:bg-red-700 hover:shadow-xl"
@@ -140,7 +144,7 @@ export default function AIAssistant() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 flex max-h-[min(620px,calc(100vh-8rem))] w-[min(440px,calc(100vw-2rem))] flex-col rounded-lg border border-gray-200 bg-white shadow-xl">
+        <div className="fixed bottom-24 right-6 z-[90] flex max-h-[min(620px,calc(100vh-8rem))] w-[min(440px,calc(100vw-2rem))] flex-col rounded-lg border border-gray-200 bg-white shadow-2xl bb-scale-in">
           {/* Header */}
           <div className="bg-red-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <h3 className="font-semibold">BloodBridge Assistant</h3>

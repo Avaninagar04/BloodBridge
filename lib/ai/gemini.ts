@@ -1,4 +1,4 @@
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash'
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash'
 
 export const AI_DISABLED_MESSAGE =
   'AI assistant is currently disabled. Core BloodBridge features still work.'

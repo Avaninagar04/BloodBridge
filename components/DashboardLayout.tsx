@@ -45,7 +45,7 @@ export function DashboardLayout({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-9 w-9 rounded-full bg-red-600 shadow-sm"></div>
+              <div className="h-9 w-9 rounded-full bg-red-600 shadow-sm bb-soft-pulse"></div>
               <h1 className="text-2xl font-bold text-gray-900">BloodBridge</h1>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -89,7 +89,7 @@ export function DashboardLayout({
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bb-fade-up">
         {children}
       </main>
 

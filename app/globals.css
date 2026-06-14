@@ -128,3 +128,126 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .bb-fade-up {
+    animation: bb-fade-up 0.65s ease both;
+  }
+
+  .bb-fade-in {
+    animation: bb-fade-in 0.45s ease both;
+  }
+
+  .bb-scale-in {
+    animation: bb-scale-in 0.25s ease both;
+  }
+
+  .bb-soft-pulse {
+    animation: bb-soft-pulse 2.8s ease-in-out infinite;
+  }
+
+  .bb-float {
+    animation: bb-float 4.5s ease-in-out infinite;
+  }
+
+  .bb-surface-pattern {
+    background-image:
+      linear-gradient(rgb(220 38 38 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(37 99 235 / 0.045) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+
+  .bb-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bb-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.38) 50%, transparent 65%);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+  }
+
+  .bb-shine:hover::after {
+    transform: translateX(120%);
+  }
+
+  .bb-delay-1 {
+    animation-delay: 80ms;
+  }
+
+  .bb-delay-2 {
+    animation-delay: 160ms;
+  }
+
+  .bb-delay-3 {
+    animation-delay: 240ms;
+  }
+
+  .bb-delay-4 {
+    animation-delay: 320ms;
+  }
+}
+
+@keyframes bb-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bb-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bb-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bb-scale-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bb-soft-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgb(220 38 38 / 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgb(220 38 38 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-fade-up,
+  .bb-fade-in,
+  .bb-scale-in,
+  .bb-soft-pulse,
+  .bb-float {
+    animation: none;
+  }
+}

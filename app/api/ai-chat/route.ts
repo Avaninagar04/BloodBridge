@@ -26,11 +26,7 @@ export async function POST(req: Request) {
       data: { user },
     } = await supabase.auth.getUser()
 
-    if (!user) {
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-    }
-
-    const apiKey = process.env.GEMINI_API_KEY
+    const apiKey = process.env.GEMINI_API_KEY?.trim()
 
     if (!apiKey) {
       return new Response(AI_DISABLED_MESSAGE, {
@@ -57,6 +53,7 @@ export async function POST(req: Request) {
 - Acknowledge emotional aspects of blood donation and receiving
 
 ${context ? `**User Context**: ${JSON.stringify(context)}` : ''}
+${user ? `The user is signed in with ID ${user.id}. Do not reveal private account data.` : 'The user is visiting the public landing page. Answer only general BloodBridge and blood donation questions. Do not request or reveal private account data.'}
 
 Always prioritize user safety and accurate medical information.`
 

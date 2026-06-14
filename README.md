@@ -1,132 +1,143 @@
+# BloodBridge AI
 
-# 🩸 BloodBridge AI
+BloodBridge AI is an AI-powered blood donation and emergency response web app that connects donors, recipients, and administrators through intelligent matching, real-time notifications, and secure role-based dashboards.
 
-An AI-powered blood donation and emergency response platform that connects donors, recipients, and administrators through intelligent matching, real-time notifications, and AI-assisted guidance.
+## Overview
 
-## 🚀 Overview
+BloodBridge AI helps recipients create urgent blood requests and helps donors discover compatible requests based on blood type, eligibility, availability, and location details. The app combines rule-based medical compatibility logic with a Gemini-powered assistant for donation guidance and education.
 
-BloodBridge AI helps patients find compatible blood donors quickly during emergencies. The platform uses AI-powered matching, blood compatibility logic, donor eligibility checks, and location-based prioritization to make the donation process faster and more efficient.
+## Core Features
 
-The system is built around three dedicated dashboards:
+- Real Supabase authentication
+- Donor, recipient, and admin dashboards
+- Blood compatibility checker
+- Smart donor-recipient matching
+- Emergency blood request flow
+- Donation offer tracking
+- Real-time notifications
+- Blood inventory management
+- Donor health eligibility scoring
+- Gemini-powered AI assistant
+- Secure PostgreSQL RLS policies
+- Production-ready Vercel deployment setup
 
-* **Donor Dashboard**
-* **Recipient Dashboard**
-* **Admin Dashboard**
+## AI Features
 
----
+BloodBridge AI includes two types of AI-powered functionality:
 
-## 🤖 AI-Powered Features
+- Rule-based AI logic for blood compatibility, donor matching, emergency priority, health eligibility, and notification generation
+- Gemini chatbot support for donation education, eligibility questions, compatibility explanations, and emergency response guidance
 
-BloodBridge AI combines AI assistance with intelligent automation to improve emergency response.
+The core app works even if Gemini is not configured. When `GEMINI_API_KEY` is missing, the assistant is disabled safely while dashboards, requests, matching, and notifications continue to work.
 
-### AI Assistant
-
-The integrated AI assistant helps users with:
-
-* Blood donation eligibility questions
-* Blood type compatibility guidance
-* Pre-donation and post-donation care
-* Emergency blood request support
-* Blood donation awareness and education
-
-### Smart AI Logic
-
-* Blood compatibility checking
-* Donor eligibility verification
-* Intelligent donor-recipient matching
-* Emergency priority scoring
-* Nearby donor prioritization
-* Automated notification recommendations
-
----
-
-## 👨‍⚕️ Donor Dashboard
+## User Roles
 
 Donors can:
 
-* Manage donor profile
-* Update blood group and health details
-* Set availability status
-* Add location information
-* View matching blood requests
-* Accept donation requests
-* Schedule donations
-* Receive real-time notifications
-
----
-
-## 🏥 Recipient Dashboard
+- Create and update donor profile
+- Add blood type, age, weight, health status, city, and area
+- Set availability
+- View compatible blood requests
+- Offer to donate
+- Track donation activity
+- Receive notifications
 
 Recipients can:
 
-* Create emergency blood requests
-* Set urgency level
-* Add hospital information
-* Track request status
-* View donor responses
-* Manage active requests
-* Receive donation updates and notifications
+- Create blood requests
+- Add blood type, units needed, hospital, doctor, contact, city, and area
+- Track request status
+- View donation offers
+- Receive emergency and donation notifications
 
----
+Admins can:
 
-## 🛡️ Admin Dashboard
+- View users, donors, recipients, requests, donations, and inventory
+- Manage blood inventory
+- Monitor platform activity
+- Access protected admin-only dashboard
 
-Administrators can:
+## Tech Stack
 
-* Monitor platform activity
-* Manage donors and recipients
-* Track blood requests and donations
-* View analytics and statistics
-* Manage blood inventory
-* Oversee emergency requests
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase Auth
+- Supabase PostgreSQL
+- Supabase Realtime
+- Gemini API
+- Vercel
 
----
+## Environment Variables
 
-## 🔄 How BloodBridge AI Works
+Create `.env.local` for local development:
 
-1. A recipient creates a blood request.
-2. The system checks blood group compatibility.
-3. AI-powered matching identifies eligible donors.
-4. Nearby donors are prioritized and notified.
-5. Donors review the request and offer to donate.
-6. The recipient receives donation offers.
-7. A donation schedule is confirmed.
-8. Both parties receive real-time updates until completion.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+```
 
----
+For Vercel, add:
 
-## ✨ Key Features
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SITE_URL=https://your-vercel-domain.vercel.app
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+```
 
-* AI-powered blood donation assistant
-* Secure authentication and authorization
-* Role-based dashboards
-* Blood compatibility checker
-* Smart donor matching
-* Emergency request management
-* Location-aware donor discovery
-* Donor eligibility verification
-* Real-time notifications
-* Donation scheduling
-* Blood inventory management
-* Privacy-focused architecture
-* Responsive modern UI
+Never commit `.env.local`.
 
----
+## Local Development
 
-## 🛠️ Tech Stack
+```bash
+pnpm install
+pnpm dev
+```
 
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
-* Supabase Auth
-* PostgreSQL
-* Supabase Realtime
-* Gemini API
-* Vercel
+Open:
 
----
+```txt
+http://localhost:3000
+```
 
-## 🎯 Project Goal
+## Database Setup
 
-BloodBridge AI aims to reduce delays in emergency blood donation by using intelligent matching, real-time communication, and AI-powered assistance to connect the right donor with the right recipient at the right time.
+Run the SQL files in Supabase SQL Editor:
+
+```txt
+sql/schema.sql
+sql/seed.sql
+sql/settings_preferences.sql
+sql/location_schedule_impact_update.sql
+```
+
+Then configure Supabase Auth URL settings:
+
+```txt
+http://localhost:3000
+http://localhost:3000/auth/callback
+```
+
+For production, add your Vercel URL and callback URL.
+
+## Deployment
+
+1. Push the project to GitHub.
+2. Import the GitHub repo into Vercel.
+3. Add all environment variables in Vercel.
+4. Deploy.
+5. Add the Vercel callback URL in Supabase Auth settings:
+
+```txt
+https://your-vercel-domain.vercel.app/auth/callback
+```
+
+## Project Goal
+
+BloodBridge AI is designed to reduce delays in emergency blood donation by helping the right donor find the right recipient faster through secure data, intelligent matching, and AI-assisted guidance.
